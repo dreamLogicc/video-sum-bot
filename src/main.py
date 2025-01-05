@@ -28,6 +28,10 @@ async def help(event):
 
 
 @bot.on(events.NewMessage)
+async def summarize_from_youtube(event):
+    pass
+
+@bot.on(events.NewMessage)
 async def summarize_video(event):
     if event.video:
         try:
