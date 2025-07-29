@@ -4,7 +4,7 @@ from huggingface_hub import InferenceClient
 class Summarizer:
 
     def __init__(self, hf_key: str, model: str = "Qwen/Qwen2.5-72B-Instruct"):
-        self.client = InferenceClient(api_key=hf_key)
+        self.client = InferenceClient(provider="hyperbolic", api_key=hf_key)
         self.model = model
 
     def set_model(self, model: str):
