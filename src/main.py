@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN)
 transcriber = Transcriber(hf_key=HF_KEY)
-summarizer = Summarizer(hf_key=HF_KEY, model='mistralai/Mistral-Nemo-Instruct-2407')
+summarizer = Summarizer(hf_key=HF_KEY)
 
 
 @bot.on(events.NewMessage(pattern='/start'))
@@ -51,6 +51,9 @@ async def summarize_video(event):
             audio_path = convert_to_audio('.temp/to_transcribe.mp4')
             text = transcriber.transcribe(audio_path)['text']
             await event.respond(summarizer.summarize(text))
+            os.remove('.temp/to_transcribe.mp4')
+            os.remove(audio_path)
+            os.rmdir('.temp')
         except Exception as ex:
             await event.respond('Не удалось выполнить суммаризацию. Попробуйте еще раз.')
             os.remove('.temp/to_transcribe.mp4')

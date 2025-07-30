@@ -9,7 +9,7 @@ def convert_to_audio(file_path):
     '''
     stream = ffmpeg.input(file_path)
     audio_track = stream.audio
-    filename = ".temp/audio.mp3"
+    filename = ".temp/audio.wav"
     stream = ffmpeg.output(audio_track, filename)
     ffmpeg.run(stream)
     return filename
